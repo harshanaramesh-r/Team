@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SUPER MARKET</title>
+
+<style>
+
+/* =========================
+   CSS
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#f5f5f5;
+}
+
+/* HEADER */
+
+header{
+    background:green;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+header h1{
+    font-size:40px;
+}
+
+/* MENU */
+
+nav{
+    margin-top:15px;
+}
+
+nav button{
+    background:white;
+    color:green;
+    border:none;
+    padding:12px 20px;
+    margin:5px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+nav button:hover{
+    background:yellow;
+    color:black;
+}
+
+/* PAGE */
+
+.page{
+    display:none;
+    padding:30px;
+}
+
+.active{
+    display:block;
+}
+
+/* HOME */
+
+.hero{
+    height:400px;
+    background-image:url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1200');
+    background-size:cover;
+    background-position:center;
+    border-radius:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.hero h2{
+    background:rgba(0,0,0,0.6);
+    color:white;
+    padding:20px 40px;
+    border-radius:10px;
+    font-size:45px;
+}
+
+/* PRODUCTS */
+
+.product-container{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+/* CARD */
+
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 10px rgba(0,0,0,0.2);
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.card:hover{
+    transform:scale(1.03);
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+/* CARD CONTENT */
+
+.card-content{
+    padding:20px;
+    text-align:center;
+}
+
+.price{
+    color:green;
+    font-size:22px;
+    margin:10px 0;
+}
+
+/* BUTTON */
+
+.buy-btn{
+    background:green;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:17px;
+}
+
+.buy-btn:hover{
+    background:darkgreen;
+}
+
+/* PRODUCT DETAILS */
+
+.product-details{
+    display:none;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    margin-top:30px;
+    box-shadow:0 5px 10px rgba(0,0,0,0.2);
+}
+
+.product-details img{
+    width:300px;
+    border-radius:15px;
+}
+
+.product-details h2{
+    margin-top:20px;
+    color:green;
+}
+
+.product-details p{
+    margin-top:15px;
+    font-size:20px;
+}
+
+/* CART */
+
+#cart-items li{
+    margin:10px 0;
+    font-size:20px;
+}
+
+/* FOOTER */
+
+footer{
+    background:black;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+<h1>SUPER MARKET</h1>
+
+<nav>
+
+<button onclick="showPage('home')">
+Home
+</button>
+
+<button onclick="showPage('products')">
+Products
+</button>
+
+<button onclick="showPage('cart')">
+Cart
+</button>
+
+</nav>
+
+</header>
+
+<!-- HOME PAGE -->
+
+<section id="home" class="page active">
+
+<div class="hero">
+
+<h2>Welcome To Super Market</h2>
+
+</div>
+
+</section>
+
+<!-- PRODUCTS PAGE -->
+
+<section id="products" class="page">
+
+<h1>Our Products</h1>
+
+<div class="product-container">
+
+<!-- PRODUCT 1 -->
+
+<div class="card"
+
+onclick="showProduct(
+'Apple',
+'Fresh Red Apple',
+'₹120',
+'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=1000'
+)">
+
+<img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=1000">
+
+<div class="card-content">
+
+<h2>Apple</h2>
+
+<p class="price">₹120</p>
+
+<button class="buy-btn"
+onclick="addToCart(event,'Apple - ₹120')">
+
+Add To Cart
+
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUCT 2 -->
+
+<div class="card"
+
+onclick="showProduct(
+'Milk',
+'Fresh Cow Milk',
+'₹60',
+'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1000'
+)">
+
+<img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1000">
+
+<div class="card-content">
+
+<h2>Milk</h2>
+
+<p class="price">₹60</p>
+
+<button class="buy-btn"
+onclick="addToCart(event,'Milk - ₹60')">
+
+Add To Cart
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT DETAILS -->
+
+<div class="product-details" id="details">
+
+<img id="detail-img">
+
+<h2 id="detail-name"></h2>
+
+<p id="detail-desc"></p>
+
+<p id="detail-price"></p>
+
+</div>
+
+</section>
+
+<!-- CART PAGE -->
+
+<section id="cart" class="page">
+
+<h1>Shopping Cart</h1>
+
+<ul id="cart-items"></ul>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<h2>Super Market Website</h2>
+
+</footer>
+
+<script>
+
+/* PAGE CHANGE */
+
+function showPage(pageId){
+
+let pages = document.querySelectorAll('.page');
+
+pages.forEach(function(page){
+
+page.classList.remove('active');
+
+});
+
+document.getElementById(pageId)
+.classList.add('active');
+
+}
+
+/* PRODUCT DETAILS */
+
+function showProduct(name,desc,price,img){
+
+document.getElementById('details')
+.style.display='block';
+
+document.getElementById('detail-name')
+.innerText=name;
+
+document.getElementById('detail-desc')
+.innerText=desc;
+
+document.getElementById('detail-price')
+.innerText=price;
+
+document.getElementById('detail-img')
+.src=img;
+
+}
+
+/* ADD TO CART */
+
+function addToCart(event,product){
+
+event.stopPropagation();
+
+let cartItems =
+document.getElementById('cart-items');
+
+let li = document.createElement('li');
+
+li.innerText = product;
+
+cartItems.appendChild(li);
+
+alert(product + ' Added To Cart');
+
+}
+
+</script>
+
+</body>
+</html>
